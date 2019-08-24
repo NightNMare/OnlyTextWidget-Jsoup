@@ -1,10 +1,10 @@
 package com.example.gyu_won.lunch_for_sunrin;
 
-import android.content.Context;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
@@ -17,42 +17,61 @@ public class MainActivity extends AppCompatActivity {
     TextView tv;
     final String path = "http://www.sunrint.hs.kr/index.do";
     String menu;
-    Handler handler =new Handler();
+    Handler handler = new Handler();
     String menus[];
+    String data3;
+    Button btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tv = findViewById(R.id.tv);
-        new Thread(){
-            public void run(){
+        btn = findViewById(R.id.button);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv.setText("Reloading");
+                GetData();
+            }
+        });
+
+        GetData();
+    }
+
+    void GetData() {
+
+
+        new Thread() {
+            public void run() {
                 try {
                     Document doc = Jsoup.connect(path).get();
-                    Log.e("try123","try");
                     Element data = doc.getElementsByClass("menu").get(0);
+                    Element data1 = data.previousElementSibling();
                     menu = data.text();
-                    Log.e("data123",menu);
-                }catch(IOException e){
-                    Log.e("data123","Error");
+                    data3 = data1.text();
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
                         menus = menu.split(",");
-                        menus[menus.length-1] = menus[menus.length-1].split(" ")[0];
-                        menu="";
-                        tv.setText("");
-                        for(int i=0;i<menus.length;i++){
-                            menu.concat(menus[i]+"\n");
-                            tv.append(menus[i]+"\n");
+                        menus[menus.length - 1] = menus[menus.length - 1].split(" ")[0];
+                        menu = "";
+                        menu = data3 + "\n\n";
+                        tv.setText(menu);
+                        for (int i = 0; i < menus.length; i++) {
+                            menu.concat(menus[i] + "\n");
+                            tv.append(menus[i] + "\n");
                         }
+                        menu = tv.getText().toString();
                     }
                 });
-
             }
         }.start();
-
     }
+
 
 }

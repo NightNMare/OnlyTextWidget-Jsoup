@@ -4,14 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Refresh"
+        android:textSize="20sp"
+        android:id="@+id/button"
+        android:background="#fff"
+        />
     <TextView
         android:id="@+id/tv"
         android:textSize="30sp"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="로딩중" />
+        android:text="Loading" />
 
 </LinearLayout>

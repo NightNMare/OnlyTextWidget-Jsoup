@@ -8,3 +8,5 @@
     android:resizeMode="vertical"
     android:updatePeriodMillis="28800000"
     android:widgetCategory="home_screen"></appwidget-provider>
+
+<!--8시간-->
