@@ -8,7 +8,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="26dp"
-        android:textColor="#fff"
+        android:textColor="#FFFFFF"
+        android:textAllCaps="false"
+        android:background="#0fff"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:id="@+id/button"
